@@ -92,9 +92,10 @@ function renderStatus(player) {
       </div>
     </div>
 
-    <button id="attack-btn">Attaquer</button>
+    <button id="attack-button">Attaquer</button>
   `;
 
+<<<<<<< Updated upstream
   document.getElementById("attack-btn").onclick = () => {
     // Le joueur attaque l'ennemi
     currentEnemy.receiveDamage(player.attack);
@@ -122,3 +123,10 @@ function renderStatus(player) {
 
 const player = new Player("Capybara");
 renderStatus(player);
+=======
+  document.getElementById("attack-button").onclick = onAttackCallback;
+}
+
+window.Player = Player;
+window.renderStatus = renderStatus;
+>>>>>>> Stashed changes
