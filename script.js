@@ -1,6 +1,6 @@
 document.getElementById("btn-start").addEventListener("click", () => 
 {
-  window.location.href = "chapitres.html";
+  window.location.href = "MenuChapitre/chapitres.html";
 });
 
 

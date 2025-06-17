@@ -25,11 +25,12 @@ chapters.forEach(chap => {
   }
 
   card.addEventListener('click', () => {
-    if (chap.unlocked) {
-      alert(`Entrée dans le chapitre ${chap.name}`);
-      // location.href = `chapitre${chap.id}.html`;
-    }
-  });
+  if (chap.unlocked) 
+    {
+    window.location.href = `../chapitres/chapitres${chap.id}.html`;
+  }
+});
+
 
   container.appendChild(card);
 });
