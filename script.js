@@ -1,7 +1,8 @@
-document.getElementById('btn-start').addEventListener('click', () => 
-    {
-        alert('Lancement du jeu...');
-    });
+document.getElementById("btn-start").addEventListener("click", () => 
+{
+  window.location.href = "chapitres.html";
+});
+
 
 
 const fullscreenBtn = document.getElementById('fullscreen-btn');
