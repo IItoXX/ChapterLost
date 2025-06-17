@@ -1,0 +1,54 @@
+#arena {
+  height: 300px;
+  background: #101a2e;
+  display: flex;
+  justify-content: space-around;
+  align-items: end;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#player, #enemy {
+  width: 80px;
+  height: 80px;
+  background-size: auto 100%;
+  image-rendering: pixelated;
+}
+
+#player.idle {
+  background-image: url('../assets/principale/Idle.png');
+  animation: idleAnim 1s steps(5) infinite;
+}
+
+@keyframes idleAnim {
+  from { background-position: 0 0; }
+  to { background-position: -400px 0; }
+}
+
+#player.attack1 {
+  background-image: url('../assets/principale/Attack1.png');
+  animation: attackAnim 0.8s steps(6) forwards;
+}
+
+@keyframes attackAnim {
+  from { background-position: 0 0; }
+  to { background-position: -480px 0; }
+}
+
+#player.death {
+  background-image: url('../assets/principale/Death.png');
+  animation: deathAnim 1.2s steps(6) forwards;
+}
+
+@keyframes deathAnim {
+  from { background-position: 0 0; }
+  to { background-position: -480px 0; }
+}
+
+
+#enemy {
+  background-image: url('https://i.ibb.co/f1bNKc1/gobelin.png'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

@@ -2,12 +2,22 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chapitre 1 – Gobelins</title>
+  <title>Chapitre 1 - Combat contre un Gobelin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../hud/hud.css" />
+  <link rel="stylesheet" href="chapitres1.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
   <div id="game-container"></div>
-  <script type="module" src="chapitres1.js"></script>
+
+  <div id="arena">
+    <div id="player" class="idle"></div>
+    <div id="enemy"></div>
+  </div>
+
+  <script src="../hud/hud.js"></script>
+  <script src="chapitres1.js"></script>
+
 </body>
 </html>

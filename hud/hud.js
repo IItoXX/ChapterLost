@@ -92,11 +92,10 @@ function renderStatus(player) {
       </div>
     </div>
 
-    <button id="attack-btn">Attaquer</button>
+    <button id="attack-button">Attaquer</button>
   `;
 
-  document.getElementById("attack-btn").onclick = () => {
-    // Le joueur attaque l'ennemi
+  document.getElementById("attack-button").onclick = () => {
     currentEnemy.receiveDamage(player.attack);
 
     if (currentEnemy.hp <= 0) {
@@ -104,7 +103,6 @@ function renderStatus(player) {
       alert(`Ennemi vaincu ! Tu gagnes ${currentEnemy.xpReward} XP.`);
       currentEnemy.hp = currentEnemy.maxHp;
     } else {
-      // L'ennemi attaque le joueur
       player.receiveDamage(currentEnemy.attack);
       if (player.hp <= 0) {
         alert("Défaite ! Game Over.");
@@ -122,3 +120,6 @@ function renderStatus(player) {
 
 const player = new Player("Capybara");
 renderStatus(player);
+
+window.Player = Player;
+window.renderStatus = renderStatus;
