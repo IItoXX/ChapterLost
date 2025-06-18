@@ -1,4 +1,8 @@
 #status-bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 24px;
   background: linear-gradient(90deg, #1a263d, #283c60);
@@ -96,7 +100,9 @@
 }
 
 #enemy-status {
-  margin-top: 18px;
+  position: absolute;
+  top: 16px;
+  left: 20px;
   font-family: 'Press Start 2P', cursive, monospace;
   color: #c3d4f7;
   user-select: none;
@@ -105,6 +111,10 @@
 }
 
 #attack-btn {
+  position: absolute;
+  bottom: 100px;
+  left: 200px;   
+  transform: translateX(-50%);
   margin-top: 26px;
   padding: 12px 30px;
   font-size: 14px;

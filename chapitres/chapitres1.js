@@ -5,9 +5,6 @@ const gobelins = [
   { name: "Gobelin", hp: 40, maxHp: 40, attack: 6, xpReward: 20 },
   { name: "Gobelin Guerrier", hp: 60, maxHp: 60, attack: 8, xpReward: 35 },
   { name: "Chef Gobelin", hp: 90, maxHp: 90, attack: 12, xpReward: 50 },
-  { name: "Chef Gobelin", hp: 90, maxHp: 90, attack: 12, xpReward: 50 },
-  { name: "Chef Gobelin", hp: 90, maxHp: 90, attack: 12, xpReward: 50 },
-  { name: "Chef Gobelin", hp: 90, maxHp: 90, attack: 12, xpReward: 1000 },
 ];
 
 let currentEnemyIndex = 0;
