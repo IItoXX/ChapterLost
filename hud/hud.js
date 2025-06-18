@@ -1,3 +1,5 @@
+import { creaturesForet } from "../mobs/mobs.js";
+
 class Player {
   constructor(name) {
     this.name = name;
@@ -29,7 +31,6 @@ class Player {
     this.attack = this.baseAttack;
     this.baseDefense = Math.floor(this.baseDefense * 1.2);
     this.defense = this.baseDefense;
-    alert("Niveau supérieur atteint !");
   }
 
   receiveDamage(amount) {
@@ -39,17 +40,9 @@ class Player {
   }
 }
 
-const currentEnemy = {
-  name: "Slime",
-  hp: 50,
-  maxHp: 50,
-  attack: 8,
-  xpReward: 20,
-  receiveDamage(amount) {
-    this.hp -= amount;
-    if (this.hp < 0) this.hp = 0;
-  }
-};
+const creaturesForet = [creaturesForet.champignon, creaturesForet.loup, creaturesForet.espritForet];
+let currentEnemyIndex = 0;
+let currentEnemy = creaturesForet[currentEnemyIndex];
 
 function renderStatus(player) {
   const container = document.getElementById("game-container");
@@ -96,21 +89,33 @@ function renderStatus(player) {
   `;
 
   document.getElementById("attack-button").onclick = () => {
-    currentEnemy.receiveDamage(player.attack);
+    // Attaque du joueur
+    const damageToEnemy = Math.max(player.attack - currentEnemy.defense, 0);
+    currentEnemy.receiveDamage(damageToEnemy);
 
     if (currentEnemy.hp <= 0) {
       player.gainXP(currentEnemy.xpReward);
-      alert(`Ennemi vaincu ! Tu gagnes ${currentEnemy.xpReward} XP.`);
-      currentEnemy.hp = currentEnemy.maxHp;
+      alert(`✔️ ${currentEnemy.name} vaincu ! Tu gagnes ${currentEnemy.xpReward} XP.`);
+      currentEnemyIndex++;
+      if (currentEnemyIndex >= creaturesForet.length) {
+        alert("🏆 Victoire ! Toutes les créatures de la forêt sont vaincues.");
+        document.getElementById("attack-button").disabled = true;
+        return;
+      } else {
+        currentEnemy = creaturesForet[currentEnemyIndex];
+      }
     } else {
+      // Attaque de l'ennemi
       player.receiveDamage(currentEnemy.attack);
       if (player.hp <= 0) {
-        alert("Défaite ! Game Over.");
+        alert("💀 Tu es mort...");
         player.hp = player.maxHp;
         player.xp = 0;
         player.level = 1;
         player.attack = player.baseAttack;
         player.defense = player.baseDefense;
+        currentEnemyIndex = 0;
+        currentEnemy = creaturesForet[0];
       }
     }
 
