@@ -6,8 +6,8 @@ export class Player {
     this.maxHp = 100;
     this.xp = 0;
     this.xpToNextLevel = 100;
-    this.baseAttack = 99;
-    this.attack = 990;
+    this.baseAttack = 10;
+    this.attack = 10;
     this.baseDefense = 5;
     this.defense = 5;
   }

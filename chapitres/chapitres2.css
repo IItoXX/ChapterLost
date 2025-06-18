@@ -1,0 +1,226 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url('../assets/Principale/caveBG.jpg');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #101a2e;
+  overflow: hidden;
+}
+
+
+#arena {
+  height: 600px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 60px;
+  position: relative;
+}
+
+
+#player-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+#enemy-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#player {
+  width: 500px;
+  height: 300px;
+  image-rendering: pixelated;
+  margin-bottom: -60px;
+  transform: translateX(-150px);
+}
+
+.player-idle {
+  background-image: url('../assets/Principale/Soldier_Idle.png');
+  background-size: 4000px 500px; 
+  animation: soldierIdle 1s steps(6) infinite;
+}
+
+
+.player-attack {
+  background-image: url('../assets/Principale/Soldier_Attack01.png');
+  background-size: 4000px 500px; 
+  animation: soldierIdle 1s steps(6) infinite;
+}
+@keyframes soldierIdle { 
+  from { background-position: 0 0; }
+  to { background-position: -4000px 0; }
+}
+
+#enemy {
+  width: 500px;
+  height: 500px;
+  image-rendering: pixelated;
+  margin-bottom: -260px;
+  transform: translateX(-30px) scaleX(-1);
+}
+
+.enemy-idle {
+  background-image: url('../assets/Principale/Orc_Idle.png');
+  background-size: 3600px 500px; 
+  animation: orcIdle 1s steps(6) infinite;
+}
+
+.enemy-attack {
+  background-image: url('../assets/Principale/Orc_Attack01.png');
+  background-size: 3600px 500px;
+  animation: orcattack 1s steps(6) infinite;
+}
+
+@keyframes orcIdle { 
+  from { background-position: 0 0; }
+  to { background-position: -3600px 0; }
+}
+
+@keyframes orcattack { 
+  from { background-position: 0 0; }
+  to { background-position: -3600px 0; }
+}
+
+
+.mutant-idle {
+  background-image: url('../assets/Principale/Enemy3No-Move-Idle.png');
+  background-size: 4000px 500px;
+  animation: mutantIdle 1s steps(8) infinite;
+}
+
+.mutant-attack {
+  background-image: url('../assets/Principale/Enemy3-AttackSmashStart.png');
+  background-size: 5000px 500px;
+  animation: mutantAttack 1s steps(12) forwards;
+}
+
+@keyframes mutantIdle {
+  from { background-position: 0 0; }
+  to { background-position: -4000px 0; }
+}
+
+@keyframes mutantAttack {
+  from { background-position: 0 0; }
+  to { background-position: -5000px 0; }
+}
+
+.enemy-death {
+  background-image: url('../assets/Principale/Orc_Death.png');
+  background-size: 1600px 500px;
+  animation: orcDeath 3s steps(4) forwards;
+}
+
+@keyframes orcDeath {
+  from { background-position: 0 0; }
+  to { background-position: -1600px 0; }
+}
+
+.mutant-death {
+  background-image: url('../assets/Principale/Enemy3-Die.png');
+  background-size: 8500px 500px;
+  animation: mutantDeath 3s steps(17) forwards;
+}
+
+@keyframes mutantDeath {
+  from { background-position: 0 0; }
+  to { background-position: -8500px 0; }
+}
+
+.player-death {
+  background-image: url('../assets/Principale/Soldier_Death.png');
+  background-size: 4000px 500px;
+  animation: playerDeath 1.2s steps(4) forwards;
+}
+
+@keyframes playerDeath {
+  from { background-position: 0 0; }
+  to { background-position: -4000px 0; }
+}
+
+
+
+#attack-btn {
+  position: absolute;
+  left: 100px;
+  bottom: 6px;
+  z-index: 10;
+  transform: translateX(250px);
+}
+
+#attack-btn:hover {
+  background: linear-gradient(90deg, #5fa5f9, #366ed1);
+  box-shadow:
+    0 0 15px 5px #4c77f6,
+    inset 0 0 20px 6px #5299ff;
+}
+
+#enemy-status {
+  position: absolute;
+  right: 100px;
+  bottom: 110px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive, monospace;
+  color: #c3d4f7;
+  text-align: center;
+  filter: drop-shadow(0 0 5px #0b2c9c);
+  transform: translateX(600px); 
+}
+
+
+#status-bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#return-map-btn {
+  position: absolute;
+  bottom: -100px;
+  left: 1000px;
+  transform: translateX(-50%);
+  padding: 14px 28px;
+  font-size: 16px;
+  background: linear-gradient(90deg, #00b894, #00cec9);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Press Start 2P', cursive, monospace;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00cec9;
+  z-index: 10;
+  display: none; 
+}
+
+#replay-btn,
+#return-map-btn {
+  position: relative;
+  display: none;
+  margin: 10px auto;
+  padding: 14px 28px;
+  font-size: 16px;
+  background: linear-gradient(90deg, #00b894, #00cec9);
+  color: rgb(166, 0, 249);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Press Start 2P', cursive, monospace;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00cec9;
+  z-index: 10;
+}
+
+#replay-btn {
+  margin-top: 40px;
+}
