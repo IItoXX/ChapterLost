@@ -59,7 +59,7 @@ html, body {
   animation: soldierIdle 1s steps(2) infinite;
   image-rendering: pixelated;
   margin-bottom: 20px;
-  transform: translateX(-150px);
+  transform: translateX(-100px) scaleX(-1);
 }
 
 #attack-btn {
