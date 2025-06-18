@@ -6,15 +6,15 @@ export class Player {
     this.maxHp = 100;
     this.xp = 0;
     this.xpToNextLevel = 100;
-    this.baseAttack = 10;
-    this.attack = 10;
+    this.baseAttack = 99;
+    this.attack = 990;
     this.baseDefense = 5;
     this.defense = 5;
   }
 
   static loadFromStorage() {
     const saved = localStorage.getItem("playerData");
-    if (!saved) return new Player("Capybara");
+    if (!saved) return new Player("AAG");
 
     const data = JSON.parse(saved);
     const player = new Player(data.name);
