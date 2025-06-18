@@ -2,10 +2,10 @@ import { Player } from "../core/player.js";
 import { renderStatus } from "../hud/hud.js";
 
 const ennemis = [
-  { name: "Mushroom", hp: 40, maxHp: 40, attack: 6, xpReward: 15, sprite: "Mushroom-Idle.png" },
-  { name: "Mushroom", hp: 50, maxHp: 50, attack: 8, xpReward: 20, sprite: "Mushroom-Idle.png" },
-  { name: "Mushroom", hp: 60, maxHp: 60, attack: 10, xpReward: 25, sprite: "Mushroom-Idle.png" },
-  { name: "Mushroom Mutant", hp: 120, maxHp: 120, attack: 0, xpReward: 60, sprite: "Enemy3No-Move-Idle.png" }
+  { name: "Mushroom1", hp: 40, maxHp: 40, attack: 6, xpReward: 15, sprite: "Mushroom-Idle.png" },
+  { name: "Mushroom2", hp: 50, maxHp: 50, attack: 8, xpReward: 20, sprite: "Mushroom-Idle.png" },
+  { name: "Mushroom3", hp: 60, maxHp: 60, attack: 10, xpReward: 25, sprite: "Mushroom-Idle.png" },
+  { name: "Mushroom Mutant", hp: 120, maxHp: 120, attack: 14, xpReward: 60, sprite: "Enemy3No-Move-Idle.png" }
 ];
 
 let currentEnemyIndex = 0;
@@ -13,46 +13,89 @@ let currentEnemy = { ...ennemis[currentEnemyIndex] };
 const player = Player.loadFromStorage();
 
 const enemyElement = document.getElementById("enemy");
-enemyElement.style.backgroundImage = `url('../assets/Principale/${currentEnemy.sprite}')`;
+const playerElement = document.getElementById("player");
 
-if (currentEnemy.name === "Mushroom Mutant") {
-  enemyElement.classList.add("mutant");
-} else {
-  enemyElement.classList.remove("mutant");
-}
+enemyElement.className = currentEnemy.name === "Mushroom Mutant" ? "mutant-idle" : "enemy-idle";
 
 function onAttack() {
-  currentEnemy.hp -= player.attack;
+  const attackBtn = document.getElementById("attack-btn");
+  attackBtn.disabled = true;
 
-  if (currentEnemy.hp <= 0) {
-    player.gainXP(currentEnemy.xpReward);
-    currentEnemyIndex++;
+  playerElement.classList.remove("player-idle");
+  playerElement.classList.add("player-attack");
 
-    if (currentEnemyIndex >= ennemis.length) {
-      //alert("🏆 Tous les ennemis ont été vaincus !");
-      document.getElementById("attack-btn").disabled = true;
-      localStorage.setItem("chapitre2", "unlocked");
+  setTimeout(function () {
+    playerElement.classList.remove("player-attack");
+    playerElement.classList.add("player-idle");
 
-      document.getElementById("return-map-btn").style.display = "block";
-      document.getElementById("replay-btn").style.display = "block";
-      return;
-    } else {
-      currentEnemy = { ...ennemis[currentEnemyIndex] };
-      enemyElement.style.backgroundImage = `url('../assets/Principale/${currentEnemy.sprite}')`;
+    enemyElement.classList.remove("enemy-idle", "mutant-idle");
+    enemyElement.classList.add("enemy-hit");
 
-      if (currentEnemy.name === "Mushroom Mutant") {
-        //alert("⚠️ Un Mushroom Mutant surgit !");
-        enemyElement.classList.add("mutant");
+    currentEnemy.hp -= player.attack;
+
+    setTimeout(function () {
+      enemyElement.classList.remove("enemy-hit");
+
+      if (currentEnemy.hp <= 0) {
+        const isMutant = currentEnemy.name === "Mushroom Mutant";
+        enemyElement.className = isMutant ? "mutant-death" : "enemy-death";
+
+        setTimeout(function () {
+          player.gainXP(currentEnemy.xpReward);
+          currentEnemyIndex++;
+
+          if (currentEnemyIndex >= ennemis.length) {
+            attackBtn.disabled = true;
+            localStorage.setItem("chapitre2", "unlocked");
+            document.getElementById("return-map-btn").style.display = "block";
+            document.getElementById("replay-btn").style.display = "block";
+            return;
+          } else {
+            setTimeout(function () {
+              currentEnemy = { ...ennemis[currentEnemyIndex] };
+              enemyElement.className = currentEnemy.name === "Mushroom Mutant" ? "mutant-idle" : "enemy-idle";
+
+              renderStatus(player, currentEnemy, onAttack);
+              attackBtn.disabled = false;
+            }, 2000);
+          }
+        }, isMutant ? 1200 : 1000);
+
       } else {
-        //alert(`✔️ ${ennemis[currentEnemyIndex - 1].name} vaincu !`);
-        enemyElement.classList.remove("mutant");
-      }
-    }
-  } else {
-    player.receiveDamage(currentEnemy.attack);
+        if (currentEnemy.name === "Mushroom Mutant") {
+          enemyElement.classList.remove("mutant-idle");
+          enemyElement.classList.add("mutant-attack");
 
-    if (player.hp <= 0) {
-      //alert("💀 Tu es mort...");
+          setTimeout(function () {
+            enemyElement.classList.remove("mutant-attack");
+            enemyElement.classList.add("mutant-idle");
+
+            player.receiveDamage(currentEnemy.attack);
+            handlePostEnemyAttack();
+          }, 1000);
+        } else {
+          enemyElement.classList.remove("enemy-idle");
+          enemyElement.classList.add("enemy-attack");
+
+          setTimeout(function () {
+            enemyElement.classList.remove("enemy-attack");
+            enemyElement.classList.add("enemy-idle");
+
+            player.receiveDamage(currentEnemy.attack);
+            handlePostEnemyAttack();
+          }, 1000);
+        }
+      }
+    }, 600);
+  }, 800);
+}
+
+function handlePostEnemyAttack() {
+  if (player.hp <= 0) {
+    playerElement.classList.remove("player-idle");
+    playerElement.classList.add("player-death");
+
+    setTimeout(function () {
       player.hp = player.maxHp;
       player.xp = 0;
       player.level = 1;
@@ -62,12 +105,18 @@ function onAttack() {
 
       currentEnemyIndex = 0;
       currentEnemy = { ...ennemis[0] };
-      enemyElement.style.backgroundImage = `url('../assets/Principale/${currentEnemy.sprite}')`;
-      enemyElement.classList.remove("mutant");
-    }
+      enemyElement.className = "enemy-idle";
+      playerElement.className = "player-idle";
+
+      renderStatus(player, currentEnemy, onAttack);
+      document.getElementById("attack-btn").disabled = false;
+    }, 1200);
+
+    return;
   }
 
   renderStatus(player, currentEnemy, onAttack);
+  document.getElementById("attack-btn").disabled = false;
 }
 
 renderStatus(player, currentEnemy, onAttack);
@@ -79,8 +128,7 @@ document.getElementById("return-map-btn").addEventListener("click", function () 
 document.getElementById("replay-btn").addEventListener("click", function () {
   currentEnemyIndex = 0;
   currentEnemy = { ...ennemis[0] };
-  enemyElement.style.backgroundImage = `url('../assets/Principale/${currentEnemy.sprite}')`;
-  enemyElement.classList.remove("mutant");
+  enemyElement.className = "enemy-idle";
   document.getElementById("attack-btn").disabled = false;
   document.getElementById("replay-btn").style.display = "none";
   document.getElementById("return-map-btn").style.display = "none";
