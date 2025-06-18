@@ -2,7 +2,7 @@ import { Player } from "../core/player.js";
 import { renderStatus } from "../hud/hud.js";
 
 const ennemis = [
-  { name: "Mushroom1", hp: 40, maxHp: 40, attack: 6, xpReward: 15, sprite: "Mushroom-Idle.png" },
+  { name: "Mushroom1", hp: 40, maxHp: 40, attack: 6, xpReward: 150, sprite: "Mushroom-Idle.png" },
   { name: "Mushroom2", hp: 50, maxHp: 50, attack: 8, xpReward: 20, sprite: "Mushroom-Idle.png" },
   { name: "Mushroom3", hp: 60, maxHp: 60, attack: 10, xpReward: 25, sprite: "Mushroom-Idle.png" },
   { name: "Mushroom Mutant", hp: 120, maxHp: 120, attack: 14, xpReward: 60, sprite: "Enemy3No-Move-Idle.png" }
