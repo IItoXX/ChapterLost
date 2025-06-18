@@ -44,11 +44,3 @@
   from { background-position: 0 0; }
   to { background-position: -480px 0; }
 }
-
-
-#enemy {
-  background-image: url('https://i.ibb.co/f1bNKc1/gobelin.png'); 
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
