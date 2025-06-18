@@ -53,14 +53,26 @@ html, body {
 
 #enemy {
   width: 500px;
-  height: 300px;
-  background-image: url('../assets/Principale/Soldier_Idle.png');
+  height: 500px;
+  background-image: url('../assets/Principale/Mushroom-Idle.png');
+  background-size: 4000px 500px; 
+  animation: soldierIdle 1s steps(7) infinite;
+  image-rendering: pixelated;
+  margin-bottom: 20px;
+  transform: translateX(-100px);
+}
+
+#enemy.mutant {
+  width: 500px;
+  height: 500px;
+  background-image: url('../assets/Principale/Enemy3No-Move-Idle.png');
   background-size: 4000px 500px; 
   animation: soldierIdle 1s steps(2) infinite;
   image-rendering: pixelated;
   margin-bottom: 20px;
-  transform: translateX(-100px) scaleX(-1);
+  transform: translateX(-100px);
 }
+
 
 #attack-btn {
   position: absolute;
@@ -98,4 +110,43 @@ html, body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+
+#return-map-btn {
+  position: absolute;
+  bottom: -100px;
+  left: 1000px;
+  transform: translateX(-50%);
+  padding: 14px 28px;
+  font-size: 16px;
+  background: linear-gradient(90deg, #00b894, #00cec9);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Press Start 2P', cursive, monospace;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00cec9;
+  z-index: 10;
+  display: none; 
+}
+
+#replay-btn,
+#return-map-btn {
+  position: relative;
+  display: none;
+  margin: 10px auto;
+  padding: 14px 28px;
+  font-size: 16px;
+  background: linear-gradient(90deg, #00b894, #00cec9);
+  color: rgb(166, 0, 249);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Press Start 2P', cursive, monospace;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00cec9;
+  z-index: 10;
+}
+
+#replay-btn {
+  margin-top: 40px;
 }

@@ -1,9 +1,10 @@
 const chapters = [
   { id: 1, name: "Forêt Magique", unlocked: true },
-  { id: 2, name: "Caverne Sombre", unlocked: false },
-  { id: 3, name: "Château Maudit", unlocked: false },
-  { id: 4, name: "Désert Ancien", unlocked: false },
+  { id: 2, name: "Caverne Sombre", unlocked: localStorage.getItem("chapitre2") === "unlocked" },
+  { id: 3, name: "Château Maudit", unlocked: localStorage.getItem("chapitre3") === "unlocked" },
+  { id: 4, name: "Désert Ancien", unlocked: localStorage.getItem("chapitre4") === "unlocked" },
 ];
+
 
 const container = document.getElementById('chapters-container');
 
