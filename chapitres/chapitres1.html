@@ -9,12 +9,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="game-container"></div>
+  <div id="game-container">
+    <div id="status-bar"></div>
+  </div>
 
   <div id="arena">
-    <div id="player" class="idle"></div>
-    <div id="enemy"></div>
+    
+  <div id="player-wrapper">
+    <div id="player"></div>
   </div>
+
+
+  <div id="enemy-wrapper">
+    <div id="enemy"></div>
+    <div id="enemy-status"></div>
+  </div>
+</div>
+
+</div>
+
 
 <script type="module" src="../hud/hud.js"></script>
 <script type="module" src="chapitres1.js"></script>

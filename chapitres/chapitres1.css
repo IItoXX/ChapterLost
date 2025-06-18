@@ -1,46 +1,101 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url('../assets/Principale/ForestBG.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #101a2e;
+  overflow: hidden;
+}
+
+
 #arena {
-  height: 300px;
-  background: #101a2e;
+  height: 600px;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  align-items: end;
-  padding: 20px;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 60px;
+  position: relative;
 }
 
-#player, #enemy {
-  width: 80px;
-  height: 80px;
-  background-size: auto 100%;
+
+#player-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+#enemy-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#player {
+  width: 500px;
+  height: 300px;
+  background-image: url('../assets/Principale/Soldier_Idle.png');
+  background-size: 4000px 500px; 
+  animation: soldierIdle 1s steps(2) infinite;
   image-rendering: pixelated;
+  margin-bottom: 20px;
+  transform: translateX(-50px);
 }
 
-#player.idle {
-  background-image: url('../assets/principale/Idle.png');
-  animation: idleAnim 1s steps(5) infinite;
-}
-
-@keyframes idleAnim {
+@keyframes soldierIdle { 
   from { background-position: 0 0; }
-  to { background-position: -400px 0; }
+  to { background-position: -4000px 0; }
 }
 
-#player.attack1 {
-  background-image: url('../assets/principale/Attack1.png');
-  animation: attackAnim 0.8s steps(6) forwards;
+#enemy {
+  width: 500px;
+  height: 300px;
+  background-image: url('../assets/Principale/Soldier_Idle.png');
+  background-size: 4000px 500px; 
+  animation: soldierIdle 1s steps(2) infinite;
+  image-rendering: pixelated;
+  margin-bottom: 20px;
+  transform: translateX(-150px);
 }
 
-@keyframes attackAnim {
-  from { background-position: 0 0; }
-  to { background-position: -480px 0; }
+#attack-btn {
+  position: absolute;
+  left: 100px;
+  bottom: 6px;
+  z-index: 10;
+  transform: translateX(250px);
 }
 
-#player.death {
-  background-image: url('../assets/principale/Death.png');
-  animation: deathAnim 1.2s steps(6) forwards;
+#attack-btn:hover {
+  background: linear-gradient(90deg, #5fa5f9, #366ed1);
+  box-shadow:
+    0 0 15px 5px #4c77f6,
+    inset 0 0 20px 6px #5299ff;
 }
 
-@keyframes deathAnim {
-  from { background-position: 0 0; }
-  to { background-position: -480px 0; }
+#enemy-status {
+  position: absolute;
+  right: 100px;
+  bottom: 110px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive, monospace;
+  color: #c3d4f7;
+  text-align: center;
+  filter: drop-shadow(0 0 5px #0b2c9c);
+  transform: translateX(600px); 
+}
+
+
+#status-bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
